@@ -1,0 +1,24 @@
+.divContainer {
+  position: relative;
+  
+}
+
+.particle {
+  position: absolute;
+  font-size: 16px;
+  color: rgb(206, 92, 92);
+  opacity: 1;
+  animation: fadeOut 1s forwards;
+  user-select: none;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
