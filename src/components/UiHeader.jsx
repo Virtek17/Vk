@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "@vkontakte/vkui";
 import settings from "../assets/icons/settings.svg";
 import rating from "../assets/icons/rating.svg";
 import gold from "../assets/icons/gold.svg";
 import diamond from "../assets/icons/diamond.svg";
+import plus from "../assets/icons/plus.svg";
+import SettingsModal from "./ModalWindows/SettingsModal";
 
-const UiHeader = ({ children, balans }) => {
+const UiHeader = ({ balans }) => {
+  const [openSettings, setOpenSettings] = useState(false);
+
   return (
     <div
       style={{
@@ -13,41 +17,32 @@ const UiHeader = ({ children, balans }) => {
         justifyContent: "space-around",
         alignItems: "center",
         fontSize: "12px",
-        backgroundColor: "#7E9999",
         width: "100%",
-        borderBottom: "5px solid #F4F1E4",
         height: "97px",
       }}
     >
-      <Image src={rating} size={32} noBorder />
+      <img src={rating} />
 
-      <div
-        style={{
-          fontSize: "20px",
-          display: "flex",
-          alignItems: "center",
-          columnGap: "10px",
-        }}
-      >
-        <div>0</div>
-        <img src={diamond} />
+      <div className="buy_money">
+        <img src={diamond} className="left" />
+        <div>99к9</div>
+        <img src={plus} alt="plus" className="right" />
       </div>
 
-      {children}
-
-      <div
-        style={{
-          fontSize: "20px",
-          display: "flex",
-          alignItems: "center",
-          columnGap: "10px",
-        }}
-      >
+      <div className="buy_money">
+        <img src={gold} className="left" />
         <div>{balans}</div>
-        <img src={gold} />
+        <img src={plus} alt="" className="right" />
       </div>
 
-      <Image src={settings} size={32} noBorder />
+      <div style={{ position: "relative" }}>
+        <img
+          src={settings}
+          onClick={() => setOpenSettings((prevState) => !prevState)}
+        />
+
+        {openSettings && <SettingsModal />}
+      </div>
     </div>
   );
 };

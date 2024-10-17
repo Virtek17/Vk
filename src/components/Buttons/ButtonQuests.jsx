@@ -7,6 +7,7 @@ export default function QuestButton({ onClick }) {
       style={{
         cursor: "pointer",
         userSelect: "none",
+        paddingTop: "34px",
       }}
     >
       <img src={questsBtn} style={{ width: "55px" }} />

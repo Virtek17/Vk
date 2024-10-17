@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image } from "@vkontakte/vkui";
 
-const Assider = ({ minutesString, secondsString, purchasedBoosters }) => {
+const Assider = ({ img, minutesSting, seceondsString, isTimerRunning }) => {
   return (
     <div className="asside">
-      {purchasedBoosters.map((booster, index) => (
-        <div key={index} className="asside_item">
-          <Image src={booster.image} alt="Booster" size={48} noBorder />
-
-          <div className="timeBuster">
-            {minutesString}:{secondsString}
-          </div>
+      <div className="asside_item">
+        {isTimerRunning && img && (
+          <img
+            src={img}
+            noBorder
+            style={{ maxHeight: "50px", maxWidth: "45px" }}
+          />
+        )}
+        <div className="timeBuster">
+          {minutesSting}:{seceondsString}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

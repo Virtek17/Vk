@@ -6,11 +6,9 @@ export default function ShopButton({ onClick }) {
     <div
       onClick={onClick}
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         cursor: "pointer",
         userSelect: "none",
+        paddingTop: "35px",
       }}
     >
       <img src={shopBtn} style={{ width: "60px" }} />

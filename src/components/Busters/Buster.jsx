@@ -4,7 +4,11 @@ import { Image } from "@vkontakte/vkui";
 const Buster = ({ className, name, coast, onClick }) => {
   return (
     <div className={className} onClick={onClick}>
-      <Image keepAspectRatio src={name} alt="eat" widthSize={50} noBorder />
+      <img
+        src={name}
+        alt="eat"
+        style={{ maxWidth: "80px", maxHeight: "80px" }}
+      />
       <button className="btnBuy">{coast}$</button>
     </div>
   );

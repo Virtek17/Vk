@@ -20,6 +20,10 @@ import eat11 from '../assets/shop/eat11.svg'
 
 import buter from '../assets/shop/buter.svg'
 import soup from '../assets/shop/soup.svg'
+import smuzy from '../assets/shop/smuzy.svg'
+import juce from '../assets/shop/juce.svg'
+import chokolate from '../assets/shop/chokolate.svg'
+
 import QuestModal from '../components/QuestModal';
 
 import UiHeader from '../components/UiHeader.jsx';
@@ -33,12 +37,14 @@ import ButtonQuests from '../components/Buttons/ButtonQuests'
 import ButtonFight from '../components/Buttons/ButtonFight'
 
 import Assider from '../components/Assider.jsx';
+import ButtonSpin from '../components/Buttons/ButtonSpin.jsx'
 
 import '../style/impuls.css';
 import '../style/click.css';
 import '../input.css';
 import '../style/shopGrid.css';
 import '../style/main.css';
+import { useSearchParams } from '@vkontakte/vk-mini-apps-router';
 
 export const First = ({id, fetchedUser}) => {
   const [activePanel, setActivePanel] = useState('panel1'); // состояние для переключение панелей
@@ -76,11 +82,11 @@ export const First = ({id, fetchedUser}) => {
     }
   }, [score, maxScore])
   
-  const setBgColor = () => {
+  const setBgColor = () => {// задает фон модалок
     setTimeout(() => {
       let elem = document.querySelector('.vkuiModalCardBase__container');
-      elem.style.backgroundColor = '#7E9999';
-      elem.style.border = '5px solid #333432'
+      elem.style.backgroundColor = '#FFA800';
+      elem.style.border = '5px solid #F6C91E'
     }, 10)
 
   }
@@ -130,15 +136,18 @@ export const First = ({id, fetchedUser}) => {
 
   }, [isTimerRunning, seconds]);
 
+
+  const [imgBust, setImgBust] = useState();
+
   // активация бустера
-  const activeBust = (bustValue, duration, coast) => {
+  const activeBust = (bustValue, duration, coast, image) => {
     if (balans >= coast) {
-      setBalans(balans-coast);
+      setBalans(balans-coast); // уменьшает баланс
       setBust(bustValue);      // Устанавливаем новое значение буста
       setSeconds(duration);    // Устанавливаем таймер
       setIsTimerRunning(true); // Запускаем таймер
       closeAllModal(); // закрываем модалку
-      boughtBust();
+      setImgBust(image); 
     }   
   }
 
@@ -200,14 +209,11 @@ export const First = ({id, fetchedUser}) => {
 
 
   const [selectedItem, setSelectedItem] = useState({ image: '', price: 0, time: 0, value: 0 });
-  const [purchasedBoosters, setPurchasedBoosters] = useState([]); // список купленных бустеров
+  const [purchasedBoosters, setPurchasedBoosters] = useState(); // список купленных бустеров
 
+  // открытие модалки покупки буста
   const handleItemClick = (image, price, time, value) => {
     setSelectedItem({ image, price, time, value });
-    setPurchasedBoosters((prevBoosters) => [
-      ...prevBoosters,
-      { image, price, time, value }
-    ]);
     changeActiveModal(MODAL_BUY);
   };
 
@@ -248,17 +254,12 @@ export const First = ({id, fetchedUser}) => {
         actions={
           <React.Fragment>
             <div className='shop_container'>
-              <Buster className="shop_items_style" onClick={() => handleItemClick(buter, 5, 10, 2)}  name={buter} coast={5}/>
-              <Buster className="shop_items_style" onClick={() => handleItemClick(soup, 7, 8, 3)} name={soup} coast={7}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(4, 10, 4)} name={eat3} coast={4} />
-              <Buster className="shop_items_style" onClick={() => activeBust(10, 5, 10)} name={eat4} coast={10} />
-              <Buster className="shop_items_style" onClick={() => activeBust(7, 7, 15)} name={eat5} coast={15} />
+              <Buster className="shop_items_style" onClick={() => handleItemClick(buter, 5, 10, 10)}  name={buter} coast={5}/>
+              <Buster className="shop_items_style" onClick={() => handleItemClick(soup, 5, 8, 2)} name={soup} coast={5}/>
+              <Buster className="shop_items_style" onClick={() => handleItemClick(smuzy, 4, 6, 5)} name={smuzy} coast={4} />
+              <Buster className="shop_items_style" onClick={() => handleItemClick(chokolate, 10, 7, 1.5)} name={chokolate} coast={10} />
+              <Buster className="shop_items_style" onClick={() => handleItemClick(juce, 15, 2, 13)} name={juce} coast={15} />
               <Buster className="shop_items_style" onClick={() => activeBust(6, 10, 10)} name={eat6} coast={10}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(8, 9, 8)} name={eat7} coast={8}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(12, 6, 10)} name={eat8} coast={10}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(5, 8, 8)} name={eat9} coast={8}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(9, 10, 13)} name={eat10} coast={13}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(25, 3, 50)} name={eat11} coast={50}/>
             </div>
           </React.Fragment>
         }
@@ -271,14 +272,14 @@ export const First = ({id, fetchedUser}) => {
         }
       />    
 
-      <ModalCard 
-        id={MODAL_BUY}
-        actions={
+      <ModalCard  
+        id={MODAL_BUY} 
+        actions={ 
           <div className="modalBuy">
             <div className="modalImg"><Image src={selectedItem.image}/></div>
             <div>{`x${selectedItem.value} point`}</div>
             <div>{`${selectedItem.time} sec`}</div>
-            <button className="modalBtn" onClick={() => {activeBust(2, 10, 5)}}>{`Price: ${selectedItem.price}`}</button>
+            <button className="modalBtn" onClick={() => {activeBust(selectedItem.value, selectedItem.time, selectedItem.price, selectedItem.image)}}>{`Price: ${selectedItem.price}`}</button>
           </div>
         }
       />    
@@ -293,32 +294,30 @@ export const First = ({id, fetchedUser}) => {
       <SplitCol>
         <View activePanel={activePanel} >          
           <Panel id="panel1" className="MyPanel">
-            <PanelHeader>Главная</PanelHeader>
+            <PanelHeader>Gym-лига</PanelHeader>
             <div className='row'>
 
               <div className='header'>
-                <UiHeader balans={balans}>
-                  {fetchedUser && (<Avatar src={photo_200} size={96 } className='avatar'/>)}
-                </UiHeader>
+                <UiHeader balans={balans} ></UiHeader>
               </div>
 
               <div className='main' >
                 <MainContent handleClick={handleClick} score={score} bust={bust} level={level} images={images} isZoomed={isZoomed} particles={particles}/>
-                <Assider minutesString={minutesSting} secondsString={seceondsString} purchasedBoosters={purchasedBoosters}/>
+                <Assider img={imgBust} minutesSting={minutesSting} seceondsString={seceondsString} isTimerRunning={isTimerRunning}/>
+                <ButtonSpin />
               </div>
               
-
+              <ProgressBar value={score} maxValue={maxScore} level={level}/>
               <div  className='MyFooter'>
                 {/* нижние кнопки */}
-                <div style={{height: '108px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', backgroundColor: '#7E9999', borderTop: '5px solid #F4F1E4', padding: '10px 0', position: 'relative'}}>
-                  <ButtonFight />
+                <div className='footer_buttons'>
                   <ButtonQuests onClick={() =>changeActiveModal(MODAL_QUEST)}/>
-                  <ProgressBar value={score} maxValue={maxScore} level={level}/>
+                  <ButtonFight />
                   <ButtonShop onClick={() =>changeActiveModal(MODAL_SHOP)}/>
                 </div>
               </div>
             </div>
-              <BalansAndTimer score={score} minutesSting={minutesSting} seceondsString={seceondsString} />
+              {/* <BalansAndTimer score={score} minutesSting={minutesSting} seceondsString={seceondsString} /> */}
           </Panel>
         </View>
       </SplitCol>

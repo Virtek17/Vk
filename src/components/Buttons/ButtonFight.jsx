@@ -1,25 +1,29 @@
 import fightBtn from "../../assets/fightBtn.svg";
 import { Image } from "@vkontakte/vkui";
+import btnFightBg from "../../assets/btnFightBg.svg";
+
 export default function FightButton() {
   return (
-    <div
-      style={{
-        width: "88px",
-        height: "88px",
-        borderRadius: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "gray",
-        cursor: "pointer",
-        margin: "0 auto",
-        position: "absolute",
-        bottom: "96px",
-        zIndex: "2",
-        userSelect: "none",
-      }}
-    >
-      <Image src={fightBtn} noBorder size={88} />
+    <div className="btn_fight">
+      <img
+        src={btnFightBg}
+        alt=""
+        style={{ postion: "relative", userSelect: "none" }}
+      />
+      <img
+        src={fightBtn}
+        alt=""
+        style={{
+          position: "absolute",
+          left: "17px",
+          top: "18px",
+          cursor: "pointer",
+          borderRadius: "250%",
+          outline: "5px solid #333432",
+          display: "flex",
+          userSelect: "none",
+        }}
+      />
     </div>
   );
 }
