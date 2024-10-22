@@ -1,50 +1,42 @@
 import { Panel, View, ModalRoot, ModalCard, Group,  Spacing, Button, SplitLayout, SplitCol, Avatar,  Header, Cell, PanelHeader, Image } from '@vkontakte/vkui';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState } from 'react';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from '../components/Main/ProgressBar.jsx';
 import clickSound from '../assets/click.mp3';
 import monkeyImage from '../assets/monkey.png';
 import monkeyImage2 from '../assets/monkey2.png';
 import monkeyImage3 from '../assets/monkey3.png';
-import eat1 from '../assets/shop/eat1.svg'
-import eat2 from '../assets/shop/eat2.svg'
-import eat3 from '../assets/shop/eat3.svg'
-import eat4 from '../assets/shop/eat4.svg'
-import eat5 from '../assets/shop/eat5.svg'
-import eat6 from '../assets/shop/eat6.svg'
-import eat7 from '../assets/shop/eat7.svg'
-import eat8 from '../assets/shop/eat8.svg'
-import eat9 from '../assets/shop/eat9.svg'
-import eat10 from '../assets/shop/eat10.svg'
-import eat11 from '../assets/shop/eat11.svg'
 
 import buter from '../assets/shop/buter.svg'
 import soup from '../assets/shop/soup.svg'
 import smuzy from '../assets/shop/smuzy.svg'
 import juce from '../assets/shop/juce.svg'
 import chokolate from '../assets/shop/chokolate.svg'
+import bananas from '../assets/shop/bananas.svg'
 
-import QuestModal from '../components/QuestModal';
+import QuestModal from '../components/ModalWindows/QuestModal.jsx';
 
-import UiHeader from '../components/UiHeader.jsx';
-import MainContent from '../components/MainContent';
-import BalansAndTimer from '../components/BalansAndTimer';
-import Particles from '../components/Particles';
-import Buster from '../components/Busters/Buster';
+import UiHeader from '../components/Main/UiHeader.jsx';
+import MainContent from '../components/Main/MainContent.jsx';
+import BalansAndTimer from '../components/Main/BalansAndTimer.jsx';
+import Particles from '../components/Main/Particles.jsx';
+import Buster from '../components/Boosters/Buster.jsx';
 
 import ButtonShop from '../components/Buttons/ButtonShop'
 import ButtonQuests from '../components/Buttons/ButtonQuests'
 import ButtonFight from '../components/Buttons/ButtonFight'
 
-import Assider from '../components/Assider.jsx';
+import Assider from '../components/Main/Assider.jsx';
 import ButtonSpin from '../components/Buttons/ButtonSpin.jsx'
 
+import '../style/reset.css'
 import '../style/impuls.css';
 import '../style/click.css';
 import '../input.css';
 import '../style/shopGrid.css';
 import '../style/main.css';
 import { useSearchParams } from '@vkontakte/vk-mini-apps-router';
+import SpinWheel from '../components/Buttons/Cards.jsx';
 
 export const First = ({id, fetchedUser}) => {
   const [activePanel, setActivePanel] = useState('panel1'); // состояние для переключение панелей
@@ -65,7 +57,7 @@ export const First = ({id, fetchedUser}) => {
   const MODAL_CARD_MONEY_SEN = 'money-send';
   const MODAL_SHOP = 'modal-shop';
   const MODAL_QUEST = 'modal-quest';
-  const MODAL_BUY = 'modal-buy';
+  const MODAL_SPINER = 'modal-spiner';
 
   const minutesSting = String(Math.floor(seconds / 60)).padStart(2, '0');
   const seceondsString = String(seconds % 60).padStart(2, '0');
@@ -78,7 +70,7 @@ export const First = ({id, fetchedUser}) => {
       setScore(0);
       setLevel((lvl) => lvl + 1)
       setMaxScore(maxScore + 100);
-      changeActiveModal(MODAL_CARD_MONEY_SEN);
+      openModal(MODAL_CARD_MONEY_SEN);
     }
   }, [score, maxScore])
   
@@ -91,28 +83,10 @@ export const First = ({id, fetchedUser}) => {
 
   }
 
-  // переключение модальных окон
-  const changeActiveModal = (activeModal) => {
 
-    activeModal = activeModal || null;
-    let localModalHistory = modalHistory ? [...modalHistory] : [];
-    
-    if (activeModal == null) {
-      localModalHistory = [];
-    } else if (modalHistory.includes(activeModal)) {
-      localModalHistory = localModalHistory.splice(0, localModalHistory.indexOf(activeModal) + 1);
-    } else {
-      localModalHistory.push(activeModal);
-    }
-    
+  const openModal = (activeModal) => {
     setActiveModal(activeModal);
-    setModalHistory(localModalHistory);
     setBgColor();
-  }
-
-  // закрытие модального окна
-  const modalBack = () => {
-    changeActiveModal(modalHistory[modalHistory.length - 2]);
   }
 
   // закрытие всех модалок
@@ -140,14 +114,14 @@ export const First = ({id, fetchedUser}) => {
   const [imgBust, setImgBust] = useState();
 
   // активация бустера
-  const activeBust = (bustValue, duration, coast, image) => {
-    if (balans >= coast) {
-      setBalans(balans-coast); // уменьшает баланс
-      setBust(bustValue);      // Устанавливаем новое значение буста
-      setSeconds(duration);    // Устанавливаем таймер
+  const activeBust = (img, price, time, value) => {
+    if (balans >= price) {
+      setBalans(balans-price); // уменьшает баланс
+      setBust(value);      // Устанавливаем новое значение буста
+      setSeconds(time);    // Устанавливаем таймер
       setIsTimerRunning(true); // Запускаем таймер
       closeAllModal(); // закрываем модалку
-      setImgBust(image); 
+      setImgBust(img); 
     }   
   }
 
@@ -208,35 +182,21 @@ export const First = ({id, fetchedUser}) => {
   }, [score])
 
 
-  const [selectedItem, setSelectedItem] = useState({ image: '', price: 0, time: 0, value: 0 });
-  const [purchasedBoosters, setPurchasedBoosters] = useState(); // список купленных бустеров
-
-  // открытие модалки покупки буста
-  const handleItemClick = (image, price, time, value) => {
-    setSelectedItem({ image, price, time, value });
-    changeActiveModal(MODAL_BUY);
-  };
-
-
-
-
-
-
 
   // модалки
   const modal = (
-    <ModalRoot activeModal={activeModal} onClose={modalBack}>
+    <ModalRoot activeModal={activeModal} onClose={closeAllModal}>
       <ModalCard 
         style={{color: 'red'}}
         id={MODAL_CARD_MONEY_SEN}
-        onClose={() => changeActiveModal(null)}
+        onClose={() => closeAllModal(null)}
         header='Поздравляем'
         subheader={`Вы достигли ${level} уровня`}
         actions={
         <React.Fragment>
           <Spacing size={16}/>
           <Button
-            onClick={modalBack}
+            onClick={closeAllModal}
             size='l'
             mode='primary'
             stretched>
@@ -250,16 +210,16 @@ export const First = ({id, fetchedUser}) => {
         id={MODAL_SHOP}
         
         header="Shop"
-        onClose={() => changeActiveModal(null)}
+        onClose={() => setActiveModal(null)}
         actions={
           <React.Fragment>
             <div className='shop_container'>
-              <Buster className="shop_items_style" onClick={() => handleItemClick(buter, 5, 10, 10)}  name={buter} coast={5}/>
-              <Buster className="shop_items_style" onClick={() => handleItemClick(soup, 5, 8, 2)} name={soup} coast={5}/>
-              <Buster className="shop_items_style" onClick={() => handleItemClick(smuzy, 4, 6, 5)} name={smuzy} coast={4} />
-              <Buster className="shop_items_style" onClick={() => handleItemClick(chokolate, 10, 7, 1.5)} name={chokolate} coast={10} />
-              <Buster className="shop_items_style" onClick={() => handleItemClick(juce, 15, 2, 13)} name={juce} coast={15} />
-              <Buster className="shop_items_style" onClick={() => activeBust(6, 10, 10)} name={eat6} coast={10}/>
+              <Buster className="shop_items_style" onClick={() => activeBust(buter, 5, 10, 10 )} img={buter} price={5} time={10} value={10}/>
+              <Buster className="shop_items_style" onClick={() => activeBust(soup, 12, 8, 6 )} img={soup} price={12} time={8} value={6}/>
+              <Buster className="shop_items_style" onClick={() => activeBust(smuzy, 5, 4, 3)} img={smuzy} price={5} time={4} value={3} />
+              <Buster className="shop_items_style" onClick={() => activeBust(juce, 4, 5, 2)} img={juce} price={4} time={5} value={2} />
+              <Buster className="shop_items_style" onClick={() => activeBust(chokolate, 8, 12, 5)} img={chokolate} price={8} time={12} value={5} />
+              <Buster className="shop_items_style" onClick={() => activeBust(bananas, 2, 12, 1.5)} img={bananas} price={2} time={12} value={1.5}/>
             </div>
           </React.Fragment>
         }
@@ -270,19 +230,17 @@ export const First = ({id, fetchedUser}) => {
         actions={
           <QuestModal balance={balans} level={level}></QuestModal>
         }
-      />    
+      /> 
 
-      <ModalCard  
-        id={MODAL_BUY} 
-        actions={ 
-          <div className="modalBuy">
-            <div className="modalImg"><Image src={selectedItem.image}/></div>
-            <div>{`x${selectedItem.value} point`}</div>
-            <div>{`${selectedItem.time} sec`}</div>
-            <button className="modalBtn" onClick={() => {activeBust(selectedItem.value, selectedItem.time, selectedItem.price, selectedItem.image)}}>{`Price: ${selectedItem.price}`}</button>
-          </div>
+      <ModalCard 
+        id={MODAL_SPINER}
+        onClose={() => setActiveModal(null)}
+        actions={
+          <React.Fragment>
+            <SpinWheel balans={balans} setBalans={setBalans}/>
+          </React.Fragment>
         }
-      />    
+      />
     </ModalRoot>
   );
 
@@ -304,16 +262,16 @@ export const First = ({id, fetchedUser}) => {
               <div className='main' >
                 <MainContent handleClick={handleClick} score={score} bust={bust} level={level} images={images} isZoomed={isZoomed} particles={particles}/>
                 <Assider img={imgBust} minutesSting={minutesSting} seceondsString={seceondsString} isTimerRunning={isTimerRunning}/>
-                <ButtonSpin />
+                <ButtonSpin onClick={() => openModal(MODAL_SPINER)} />
               </div>
               
               <ProgressBar value={score} maxValue={maxScore} level={level}/>
               <div  className='MyFooter'>
                 {/* нижние кнопки */}
                 <div className='footer_buttons'>
-                  <ButtonQuests onClick={() =>changeActiveModal(MODAL_QUEST)}/>
+                  <ButtonQuests onClick={() =>openModal(MODAL_QUEST)}/>
                   <ButtonFight />
-                  <ButtonShop onClick={() =>changeActiveModal(MODAL_SHOP)}/>
+                  <ButtonShop onClick={() =>openModal(MODAL_SHOP)}/>
                 </div>
               </div>
             </div>

@@ -50,7 +50,7 @@ body,
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
   /* background-image: url('../assets/jungle.jpg'); */
   /* background-repeat: no-repeat;
@@ -199,6 +199,8 @@ body,
   height: 20px;
 
   position: relative;
+
+  user-select: none;
 }
 .buy_money div {
   min-width: 62px;
@@ -235,6 +237,8 @@ body,
   right: -12px;
 
   animation: setting 0.3s;
+
+  user-select: none;
 }
 
 @keyframes setting {
@@ -263,7 +267,7 @@ body,
 
 .spiner {
   position: absolute;
-  left: 20px;
-  top: 7px;
+  left: 25px;
+  top: 10px;
   user-select: none;
 }
