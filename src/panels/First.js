@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState } from 'react';
 import ProgressBar from '../components/Main/ProgressBar.jsx';
 import clickSound from '../assets/click.mp3';
+import unit1 from '../assets/unit1.png';
 import monkeyImage from '../assets/monkey.png';
 import monkeyImage2 from '../assets/monkey2.png';
 import monkeyImage3 from '../assets/monkey3.png';
@@ -29,14 +30,17 @@ import ButtonFight from '../components/Buttons/ButtonFight'
 import Assider from '../components/Main/Assider.jsx';
 import ButtonSpin from '../components/Buttons/ButtonSpin.jsx'
 
+import MainModal from '../components/CustomModals/MainModal.jsx';
+
 import '../style/reset.css'
 import '../style/impuls.css';
 import '../style/click.css';
 import '../input.css';
 import '../style/shopGrid.css';
 import '../style/main.css';
-import { useSearchParams } from '@vkontakte/vk-mini-apps-router';
+// import '../components/CustomModals/MainModal.css'
 import SpinWheel from '../components/Buttons/Cards.jsx';
+import { useSearchParams } from '@vkontakte/vk-mini-apps-router';
 
 export const First = ({id, fetchedUser}) => {
   const [activePanel, setActivePanel] = useState('panel1'); // состояние для переключение панелей
@@ -52,7 +56,7 @@ export const First = ({id, fetchedUser}) => {
   const [modalHistory, setModalHistory] = useState([]); // массив со всеми модалками  
   const [isZoomed, setIsZoomed] = useState(false); // приближение image при клике
 
-  const images = [monkeyImage, monkeyImage2, monkeyImage3];
+  const images = [unit1, monkeyImage2, monkeyImage3];
 
   const MODAL_CARD_MONEY_SEN = 'money-send';
   const MODAL_SHOP = 'modal-shop';
@@ -244,7 +248,10 @@ export const First = ({id, fetchedUser}) => {
     </ModalRoot>
   );
 
-
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  
+  const openMainModal = () => setIsOpenModal(true);
+  const closeMainModal = () => setIsOpenModal(false);
 
   // прототип кликера
   return (
@@ -252,17 +259,22 @@ export const First = ({id, fetchedUser}) => {
       <SplitCol>
         <View activePanel={activePanel} >          
           <Panel id="panel1" className="MyPanel">
+
+            {/* Тестовое модальное окно */}
+            {isOpenModal && <MainModal onClose={closeMainModal}>ghbdtn</MainModal>}
+                
             <PanelHeader>Gym-лига</PanelHeader>
             <div className='row'>
 
               <div className='header'>
                 <UiHeader balans={balans} ></UiHeader>
               </div>
-
+              <button onClick={openMainModal}>клик</button>
               <div className='main' >
                 <MainContent handleClick={handleClick} score={score} bust={bust} level={level} images={images} isZoomed={isZoomed} particles={particles}/>
                 <Assider img={imgBust} minutesSting={minutesSting} seceondsString={seceondsString} isTimerRunning={isTimerRunning}/>
                 <ButtonSpin onClick={() => openModal(MODAL_SPINER)} />
+                
               </div>
               
               <ProgressBar value={score} maxValue={maxScore} level={level}/>

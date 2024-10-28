@@ -1,0 +1,49 @@
+body {
+  /* overflow-x: hidden; */
+}
+
+.modalBackground {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+.modalBackground.active{
+  display: block;
+}
+
+.modalActive {
+  position: absolute;
+  width: 350px;
+  height: 495px;
+  top: calc(50% - 250px);
+  left: calc(50% - 175px);
+  border-radius: 10px;
+  background-color: #FFA800;
+  cursor: default;
+  padding: 40px 20px;
+
+}
+
+.modalClose{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.modalClose img {
+  width: 24px;
+  height: 24px;
+  margin: 3px;
+}
+
+.modalWindow {
+  position: relative;
+}

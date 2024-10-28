@@ -17,10 +17,15 @@ const MainContent = ({
         keepAspectRatio
         src={images[level - 1] || images[2]}
         alt="Тапни monkey"
-        widthSize={150}
+        widthSize={120}
         noBorder
         className={isZoomed ? "zoomed" : ""}
-        style={{ userSelect: "none" }}
+        style={{
+          userSelect: "none",
+          position: "relative",
+          bottom: "20px",
+          left: "-10px",
+        }}
       >
         {particles.map((particle) => (
           <p
