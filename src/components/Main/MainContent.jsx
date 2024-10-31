@@ -1,6 +1,9 @@
 import React from "react";
 import { Image } from "@vkontakte/vkui";
 import "../../style/main.css";
+import tShirt from "../../assets/Tshirt.png";
+import pants from "../../assets/pants.png";
+import sneakers from "../../assets/snikers.png";
 
 const MainContent = ({
   handleClick,
@@ -42,6 +45,8 @@ const MainContent = ({
             {`+${bust}`}
           </p>
         ))}
+
+        <img src={tShirt} alt="футболка" className={"tshirt show"} />
       </Image>
     </div>
   );

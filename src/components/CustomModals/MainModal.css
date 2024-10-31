@@ -1,5 +1,5 @@
 body {
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .modalBackground {
@@ -12,38 +12,85 @@ body {
   z-index: 10;
 }
 
-.modalBackground.active{
+.modalBackground.active {
   display: block;
 }
 
 .modalActive {
   position: absolute;
-  width: 350px;
-  height: 495px;
+  width: 380px;
+  height: 535px;
   top: calc(50% - 250px);
-  left: calc(50% - 175px);
-  border-radius: 10px;
-  background-color: #FFA800;
-  cursor: default;
-  padding: 40px 20px;
+  left: calc(50% - 190px);
+  border-radius: 35px;
+  background-color: #ffa800;
+  border: #ce7101 5px solid;
 
+  cursor: default;
+  padding: 80px 16px 56px;
+
+  animation: slideUp 0.7s ease;
 }
 
-.modalClose{
+.modalClose {
   position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 30px;
-  height: 30px;
+  right: -10px;
+  top: -10px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
 }
 
 .modalClose img {
-  width: 24px;
-  height: 24px;
-  margin: 3px;
+  width: 36px;
+  height: 36px;
 }
 
 .modalWindow {
   position: relative;
+}
+
+.header_modal__row {
+  position: absolute;
+  top: -70px;
+  left: 20px;
+}
+
+.header_modal__shop {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.header_modal__btn {
+  width: 70px;
+  height: 64px;
+
+  background-color: #e89a03;
+  border-radius: 20px;
+  border: solid 2px #ffdc24;
+}
+
+.header_modal__btn.active {
+  background-color: #ffd701;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(5%);
+  }
+  80% {
+    transform: translateY(-2%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

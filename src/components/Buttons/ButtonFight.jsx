@@ -19,7 +19,7 @@ export default function FightButton() {
           top: "18px",
           cursor: "pointer",
           borderRadius: "250%",
-          outline: "5px solid #333432",
+          outline: "3px solid #E5782F",
           display: "flex",
           userSelect: "none",
         }}

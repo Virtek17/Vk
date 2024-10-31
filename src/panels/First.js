@@ -15,6 +15,10 @@ import juce from '../assets/shop/juce.svg'
 import chokolate from '../assets/shop/chokolate.svg'
 import bananas from '../assets/shop/bananas.svg'
 
+import tabIconEat from '../assets/shop/eatTabIcon.svg';
+import tabIconClothes from '../assets/shop/clothesTabIcon.svg';
+
+
 import QuestModal from '../components/ModalWindows/QuestModal.jsx';
 
 import UiHeader from '../components/Main/UiHeader.jsx';
@@ -126,6 +130,7 @@ export const First = ({id, fetchedUser}) => {
       setIsTimerRunning(true); // Запускаем таймер
       closeAllModal(); // закрываем модалку
       setImgBust(img); 
+      closeMainModal();
     }   
   }
 
@@ -210,24 +215,7 @@ export const First = ({id, fetchedUser}) => {
         }
       />
 
-      <ModalCard 
-        id={MODAL_SHOP}
-        
-        header="Shop"
-        onClose={() => setActiveModal(null)}
-        actions={
-          <React.Fragment>
-            <div className='shop_container'>
-              <Buster className="shop_items_style" onClick={() => activeBust(buter, 5, 10, 10 )} img={buter} price={5} time={10} value={10}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(soup, 12, 8, 6 )} img={soup} price={12} time={8} value={6}/>
-              <Buster className="shop_items_style" onClick={() => activeBust(smuzy, 5, 4, 3)} img={smuzy} price={5} time={4} value={3} />
-              <Buster className="shop_items_style" onClick={() => activeBust(juce, 4, 5, 2)} img={juce} price={4} time={5} value={2} />
-              <Buster className="shop_items_style" onClick={() => activeBust(chokolate, 8, 12, 5)} img={chokolate} price={8} time={12} value={5} />
-              <Buster className="shop_items_style" onClick={() => activeBust(bananas, 2, 12, 1.5)} img={bananas} price={2} time={12} value={1.5}/>
-            </div>
-          </React.Fragment>
-        }
-      />
+      
 
       <ModalCard 
         id={MODAL_QUEST}
@@ -253,6 +241,13 @@ export const First = ({id, fetchedUser}) => {
   const openMainModal = () => setIsOpenModal(true);
   const closeMainModal = () => setIsOpenModal(false);
 
+
+  const [activeTab, setActiveTab] = useState('eat');
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  }
+
+
   // прототип кликера
   return (
     <SplitLayout modal={modal}> 
@@ -261,7 +256,43 @@ export const First = ({id, fetchedUser}) => {
           <Panel id="panel1" className="MyPanel">
 
             {/* Тестовое модальное окно */}
-            {isOpenModal && <MainModal onClose={closeMainModal}>ghbdtn</MainModal>}
+            {isOpenModal && 
+            <MainModal onClose={closeMainModal}>
+              <div className='header_modal__row'>
+                <div className='header_modal__shop'>
+                  <button
+                    onClick={() => handleTabChange('eat')} 
+                    className={`header_modal__btn ${activeTab === 'eat' ? 'active' : ''}`}>
+                      <img src={tabIconEat} alt='кнопка магазин'/>
+                    </button>
+
+                  <button 
+                    onClick={() => handleTabChange('clothes')} 
+                    className={`header_modal__btn ${activeTab === 'clothes' ? 'active' : ''}`}>
+                      <img src={tabIconClothes} alt='кнопка магазин'/>
+                  </button>
+                </div>
+              </div>
+              <div className='shop_container'>
+
+                {activeTab === 'eat' && (
+                <>
+                  <Buster className="shop_items_style" onClick={() => activeBust(buter, 5, 10, 10 )} img={buter} price={5} time={10} value={10}/>
+                  <Buster className="shop_items_style" onClick={() => activeBust(soup, 12, 8, 6 )} img={soup} price={12} time={8} value={6}/>
+                  <Buster className="shop_items_style" onClick={() => activeBust(smuzy, 5, 4, 3)} img={smuzy} price={5} time={4} value={3} />
+                  <Buster className="shop_items_style" onClick={() => activeBust(juce, 4, 5, 2)} img={juce} price={4} time={5} value={2} />
+                  <Buster className="shop_items_style" onClick={() => activeBust(chokolate, 8, 12, 5)} img={chokolate} price={8} time={12} value={5} />
+                  <Buster className="shop_items_style" onClick={() => activeBust(bananas, 2, 12, 1.5)} img={bananas} price={2} time={12} value={1.5}/>
+                </>
+                )}
+                {activeTab === 'clothes' && (
+                  <>
+                    <Buster className="shop_items_style" onClick={() => activeBust(bananas, 2, 12, 1.5)} img={bananas} price={2} time={12} value={1.5}/>
+                  </>
+                )}
+ 
+              </div>  
+            </MainModal>}
                 
             <PanelHeader>Gym-лига</PanelHeader>
             <div className='row'>
@@ -269,12 +300,10 @@ export const First = ({id, fetchedUser}) => {
               <div className='header'>
                 <UiHeader balans={balans} ></UiHeader>
               </div>
-              <button onClick={openMainModal}>клик</button>
               <div className='main' >
                 <MainContent handleClick={handleClick} score={score} bust={bust} level={level} images={images} isZoomed={isZoomed} particles={particles}/>
                 <Assider img={imgBust} minutesSting={minutesSting} seceondsString={seceondsString} isTimerRunning={isTimerRunning}/>
                 <ButtonSpin onClick={() => openModal(MODAL_SPINER)} />
-                
               </div>
               
               <ProgressBar value={score} maxValue={maxScore} level={level}/>
@@ -283,7 +312,7 @@ export const First = ({id, fetchedUser}) => {
                 <div className='footer_buttons'>
                   <ButtonQuests onClick={() =>openModal(MODAL_QUEST)}/>
                   <ButtonFight />
-                  <ButtonShop onClick={() =>openModal(MODAL_SHOP)}/>
+                  <ButtonShop onClick={() =>openMainModal()}/>
                 </div>
               </div>
             </div>

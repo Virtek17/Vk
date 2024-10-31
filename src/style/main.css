@@ -52,7 +52,7 @@ body,
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-image: url('../assets/platform.svg');
+  background-image: url("../assets/platform.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 30%;
@@ -274,4 +274,10 @@ body,
   left: 25px;
   top: 10px;
   user-select: none;
+}
+
+.tshirt.show {
+  position: absolute;
+  top: 28.5%;
+  left: 38%;
 }

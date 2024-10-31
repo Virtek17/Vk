@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
 
-  max-height: 400px;
+  max-height: 390px;
   overflow-y: scroll;
   font-size: 12px;
   padding-right: 12px;
@@ -46,7 +46,8 @@
   gap: 5px;
   font-size: 18px;
   font-family: crooker;
-  -webkit-text-stroke: 1px #000;
+  color: #9a7700;
+  /* -webkit-text-stroke: 1px #000; */
 }
 
 .characteristics_items {

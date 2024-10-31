@@ -2,7 +2,7 @@ import { Children } from "react";
 import cross from "../../assets/cross.svg";
 import "./MainModal.css";
 
-const MainModal = ({ onClose, isModalOpen, children }) => {
+const MainModal = ({ onClose, isModalOpen, children, headerChildren }) => {
   return (
     <div
       className={`modalBackground ${isModalOpen ? "active" : ""}`}
@@ -12,7 +12,7 @@ const MainModal = ({ onClose, isModalOpen, children }) => {
         <div className="modalClose" onClick={onClose}>
           <img src={cross} alt="cross" />
         </div>
-
+        <div>{headerChildren}</div>
         <div className="modalWindow">{children}</div>
       </div>
     </div>
