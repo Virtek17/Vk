@@ -1,6 +1,6 @@
 import React from "react";
-import music from "../../assets/music.svg";
-import sound from "../../assets/sound.svg";
+import music from "../../../public/buttons/music.svg";
+import sound from "../../../public/buttons/sound.svg";
 
 const SettingsModal = () => {
   return (

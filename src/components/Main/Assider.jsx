@@ -1,6 +1,3 @@
-import React, { useEffect } from "react";
-import { Image } from "@vkontakte/vkui";
-
 const Assider = ({ img, minutesSting, seceondsString, isTimerRunning }) => {
   return (
     <div className="asside">

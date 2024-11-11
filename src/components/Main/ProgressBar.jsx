@@ -1,5 +1,3 @@
-// ProgressBar.jsx
-import { Cell, filterFnForSelect } from "@vkontakte/vkui";
 import React from "react";
 
 const ProgressBar = ({ value, maxValue, level }) => {

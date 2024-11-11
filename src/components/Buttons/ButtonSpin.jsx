@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import card from "../../assets/icons/cardIcon.svg";
+import card from "../../../public/buttons/cards.svg";
 
 const ButtonSpin = ({ onClick, initialTime = 30 }) => {
   const [timeLeft, setTimeLeft] = useState(0); // Таймер в секундах

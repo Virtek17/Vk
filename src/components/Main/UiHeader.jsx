@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import settings from "../../assets/icons/settings.svg";
-import rating from "../../assets/icons/rating.svg";
-import gold from "../../assets/icons/gold.svg";
-import diamond from "../../assets/icons/diamond.svg";
-import plus from "../../assets/icons/plus.svg";
+// ========= Импорты картинок =========
+import settings from "../../../public/buttons/settings.svg";
+import plus from "../../../public/buttons/plus.svg";
+import rating from "../../../public/buttons/rating.svg";
+import gold from "../../../public/icons_main/gold.svg";
+import diamond from "../../../public/icons_main/diamond.svg";
+// ====================================
 import SettingsModal from "../../components/ModalWindows/SettingsModal";
 
 const UiHeader = ({ balans }) => {
@@ -24,7 +26,7 @@ const UiHeader = ({ balans }) => {
 
       <div className="buy_money">
         <img src={diamond} className="left" />
-        <div>99к9</div>
+        <div>99</div>
         <img src={plus} alt="plus" className="right" />
       </div>
 

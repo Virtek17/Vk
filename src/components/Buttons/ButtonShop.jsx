@@ -1,6 +1,5 @@
-import { widthHalfInterval } from "@vkontakte/vkui/dist/lib/adaptivity/breakpoints";
-import shopBtn from "../../assets/shopBtn.svg";
-import { Image } from "@vkontakte/vkui";
+import shopBtn from "../../../public/buttons/shop.svg";
+
 export default function ShopButton({ onClick }) {
   return (
     <div

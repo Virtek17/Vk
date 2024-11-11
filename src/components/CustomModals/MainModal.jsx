@@ -1,5 +1,4 @@
-import { Children } from "react";
-import cross from "../../assets/cross.svg";
+import cross from "../../../public/buttons/cross.svg";
 import "./MainModal.css";
 
 const MainModal = ({ onClose, isModalOpen, children, headerChildren }) => {

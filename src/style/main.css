@@ -52,7 +52,7 @@ body,
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-image: url("../assets/platform.svg");
+  background-image: url("../../public/background/platform.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 30%;
@@ -60,6 +60,13 @@ body,
   /* background-repeat: no-repeat;
   background-position: center; */
 }
+@media (max-width: 460px) {
+  .MyMain {
+    background-size: 60%;
+    background-position: 50% 55%;
+  }
+}
+
 .header {
   /* border: 10px solid red; */
   height: 102px;
@@ -255,7 +262,7 @@ body,
 }
 
 .spinBg {
-  background-image: url("../assets/icons/spinBg.svg");
+  background-image: url("../../public/background/cardBg.svg");
   background-repeat: no-repeat;
 
   width: 118px;
@@ -276,8 +283,57 @@ body,
   user-select: none;
 }
 
+.tshirt {
+  display: none;
+}
+.pants {
+  display: none;
+}
+.sneakers {
+  display: none;
+}
+.sneakers2 {
+  display: none;
+}
+.tshirt2 {
+  display: none;
+}
 .tshirt.show {
+  display: block;
   position: absolute;
   top: 28.5%;
   left: 38%;
+  z-index: 2;
+}
+
+.pants.show {
+  display: block;
+  position: absolute;
+  top: 50.7%;
+  left: 33%;
+  z-index: 1;
+}
+
+.sneakers.show {
+  display: block;
+  position: absolute;
+  bottom: 4%;
+  left: 24%;
+  z-index: 2;
+}
+
+.sneakers2.show {
+  display: block;
+  position: absolute;
+  bottom: 3%;
+  left: 23%;
+  z-index: 2;
+}
+
+.tshirt2.show {
+  display: block;
+  position: absolute;
+  top: 28.5%;
+  left: 8%;
+  z-index: 2;
 }

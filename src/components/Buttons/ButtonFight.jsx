@@ -1,6 +1,5 @@
-import fightBtn from "../../assets/fightBtn.svg";
-import { Image } from "@vkontakte/vkui";
-import btnFightBg from "../../assets/btnFightBg.svg";
+import fightBtn from "../../../public/buttons/fightBtn.svg";
+import btnFightBg from "../../../public/background/btnFightBg.svg";
 
 export default function FightButton() {
   return (

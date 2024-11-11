@@ -1,6 +1,6 @@
 import "../../style/cards.css";
-import diamond from "../../assets/icons/diamond.svg";
-import bananas from "../../assets/shop/bananas.svg";
+import diamond from "../../../public/icons_main/diamond.svg";
+import bananas from "../../../public/shop/eat/bananas.svg";
 import { useState, useEffect } from "react";
 
 // Инициализация карточек

@@ -1,5 +1,5 @@
-import { Image } from "@vkontakte/vkui";
-import questsBtn from "../../assets/quests.svg";
+import questsBtn from "../../../public/buttons/quests.svg";
+
 export default function QuestButton({ onClick }) {
   return (
     <div

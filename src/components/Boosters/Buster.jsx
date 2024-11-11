@@ -1,7 +1,7 @@
 import React from "react";
-import busterIcon from "../../assets/icons/bustIcon.svg";
-import timerIcon from "../../assets/icons/timerIcon.svg";
-import cabinIcon from "../../assets/icons/cabinIcon.svg";
+import booster from "../../../public/icons_shop/booster.svg";
+import timer from "../../../public/icons_shop/timer.svg";
+import gold from "../../../public/icons_shop/gold.svg";
 
 const Buster = ({ className, img, price, time, value, onClick }) => {
   return (
@@ -13,16 +13,16 @@ const Buster = ({ className, img, price, time, value, onClick }) => {
       />
       <div className="characteristics">
         <div className="characteristics_items">
-          <img src={busterIcon} alt="icon" />+{value}
+          <img src={booster} alt="icon" />+{value}
         </div>
 
         <div className="characteristics_items">
-          <img src={timerIcon} alt="icon" />
+          <img src={timer} alt="icon" />
           {time} сек
         </div>
 
         <div className="characteristics_items">
-          <img src={cabinIcon} alt="icon" className="leftIcon" />
+          <img src={gold} alt="icon" className="leftIcon" />
           {price}
         </div>
       </div>

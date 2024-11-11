@@ -1,14 +1,20 @@
-import { Panel, PanelHeader, PanelHeaderBack, Placeholder } from '@vkontakte/vkui';
-import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import PropTypes from 'prop-types';
-import PersikImage from '../assets/persik.png';
+import {
+  Panel,
+  PanelHeader,
+  PanelHeaderBack,
+  Placeholder,
+} from "@vkontakte/vkui";
+import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import PropTypes from "prop-types";
 
 export const Persik = ({ id }) => {
   const routeNavigator = useRouteNavigator();
 
   return (
     <Panel id={id}>
-      <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />}>
+      <PanelHeader
+        before={<PanelHeaderBack onClick={() => routeNavigator.back()} />}
+      >
         Persik
       </PanelHeader>
       <Placeholder>
