@@ -1,0 +1,8 @@
+{
+  "app_id": 52290431,
+  "endpoints": {
+    "mobile": "index.html",
+    "mvk": "index.html",
+    "web": "index.html"
+  }
+}
