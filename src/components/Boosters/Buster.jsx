@@ -6,11 +6,14 @@ import gold from "../../assets/icons_shop/gold.svg";
 const Buster = ({ className, img, price, time, value, onClick }) => {
   return (
     <div className={className}>
-      <img
-        src={img}
-        alt="eat"
-        style={{ maxWidth: "80px", maxHeight: "80px" }}
-      />
+      <div className="imgBg">
+        <img
+          src={img}
+          alt="eat"
+          style={{ maxWidth: "80px", maxHeight: "80px" }}
+        />
+      </div>
+
       <div className="characteristics">
         <div className="characteristics_items">
           <img src={booster} alt="icon" />+{value}

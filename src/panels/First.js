@@ -31,7 +31,7 @@ import tshirt from "../assets/shop/clothes/tshirt.svg";
 import pants from "../assets/shop/clothes/pants.svg";
 import sneakers from "../assets/shop/clothes/sneakers.svg";
 import tshirt2 from "../assets/shop/clothes/tshirtNefor.svg";
-import sneakers2 from "../assets/shop/clothes/tshirtSpider.svg";
+import sneakers2 from "../assets/shop/clothes/sneakersNike.svg";
 
 // Импорты персонажа
 import unit1 from "../assets/unit/unit1.png";
@@ -39,6 +39,11 @@ import unit1 from "../assets/unit/unit1.png";
 // Импорты кнопок в магазине
 import tabIconEat from "../assets/buttons/eatTab.svg";
 import tabIconClothes from "../assets/buttons/clothesTab.svg";
+
+// Импорты иконок состояния покупки в магазине
+import worn from "../assets/icons_shop/worn.svg";
+import purchased from "../assets/icons_shop/purchased.svg";
+
 // ==================================================================================
 
 // =================================== Импорты компонентов =============================
@@ -273,14 +278,48 @@ export const First = ({ id, fetchedUser }) => {
   const showSneakers2 = () => setActiveSneakers2((prevState) => !prevState);
   const showTshirt2 = () => setActiveTshirt2((prevState) => !prevState);
 
+  const [textState, setTextState] = useState();
+  const [imgState, setImgState] = useState(null);
+
   const [clothes, setClothes] = useState({
-    tshirt: { text: "Купить", isPurchased: false, isWorn: false },
-    pants: { text: "Купить", isPurchased: false, isWorn: false },
-    sneakers: { text: "Купить", isPurchased: false, isWorn: false },
-    sneakers2: { text: "Купить", isPurchased: false, isWorn: false },
-    tshirt2: { text: "Купить", isPurchased: false, isWorn: false },
+    tshirt: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    pants: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    sneakers: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    sneakers2: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    tshirt2: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
   });
 
+  /*
   const handleClothesClick = (key) => {
     setClothes((prevClothes) => {
       const item = prevClothes[key];
@@ -301,7 +340,7 @@ export const First = ({ id, fetchedUser }) => {
       }
     });
   };
-
+*/
   const buyClothes = (name, price, value) => {
     setClothes((prevClothes) => {
       const item = prevClothes[name];
@@ -318,6 +357,8 @@ export const First = ({ id, fetchedUser }) => {
               isPurchased: true,
               isWorn: false, // Не надеваем при покупке
               text: "Надеть",
+              textState: "Купленно",
+              imgState: purchased,
             },
           };
         } else {
@@ -346,6 +387,8 @@ export const First = ({ id, fetchedUser }) => {
           ...item,
           isWorn: !item.isWorn, // Переключаем надет/снят
           text: item.isWorn ? "Надеть" : "Снять",
+          textState: item.isWorn ? "Купленно" : "Надето",
+          imgState: item.isWorn ? purchased : worn,
         },
       };
     });
@@ -439,11 +482,11 @@ export const First = ({ id, fetchedUser }) => {
                       <Clothes
                         img={tshirt}
                         booster={clothes.tshirt}
-                        onButtonClick={() =>
+                        onButtonClick={() => {
                           clothes.tshirt.isPurchased
                             ? toggleWearClothes("tshirt", 25)
-                            : buyClothes("tshirt", 5, 25)
-                        }
+                            : buyClothes("tshirt", 5, 25);
+                        }}
                         value={25}
                         price={5}
                         balance={balans}
