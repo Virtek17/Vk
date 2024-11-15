@@ -1,5 +1,4 @@
-import shopBtn from "../../../public/buttons/shop.svg";
-
+import shopBtn from "../../assets/buttons/shop.svg";
 export default function ShopButton({ onClick }) {
   return (
     <div

@@ -1,6 +1,7 @@
 import "../../style/cards.css";
-import diamond from "../../../public/icons_main/diamond.svg";
-import bananas from "../../../public/shop/eat/bananas.svg";
+// призы в карточках (сделать отдельную папку)
+import diamond from "../../assets/icons_main/diamond.svg";
+import bananas from "../../assets/shop/eat/bananas.svg";
 import { useState, useEffect } from "react";
 
 // Инициализация карточек

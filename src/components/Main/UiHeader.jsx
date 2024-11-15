@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 // ========= Импорты картинок =========
-import settings from "../../../public/buttons/settings.svg";
-import plus from "../../../public/buttons/plus.svg";
-import rating from "../../../public/buttons/rating.svg";
-import gold from "../../../public/icons_main/gold.svg";
-import diamond from "../../../public/icons_main/diamond.svg";
+import settings from "../../assets/buttons/settings.svg";
+import plus from "../../assets/buttons/plus.svg";
+import rating from "../../assets/buttons/rating.svg";
+import gold from "../../assets/icons_main/gold.svg";
+import diamond from "../../assets/icons_main/diamond.svg";
 // ====================================
 import SettingsModal from "../../components/ModalWindows/SettingsModal";
 

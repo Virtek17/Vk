@@ -19,29 +19,31 @@ import React, { useEffect, useState } from "react";
 
 // =================================== Импорты картинок =============================
 // Импорты еды из магазина
-import buter from "../../public/shop/eat/buter.svg";
-import soup from "../../public/shop/eat/soup.svg";
-import smuzy from "../../public/shop/eat/smuzy.svg";
-import juce from "../../public/shop/eat/juce.svg";
-import chokolate from "../../public/shop/eat/chokolate.svg";
-import bananas from "../../public/shop/eat/bananas.svg";
-import energy from '../../public/shop/eat/energy.svg';
-import chokolate2 from '../../public/shop/eat/chokolate2.svg';
-import cocktiel from '../../public/shop/eat/cocktiel.svg';
+import buter from "../assets/shop/eat/buter.svg";
+import soup from "../assets/shop/eat/soup.svg";
+import smuzy from "../assets/shop/eat/smuzy.svg";
+import juce from "../assets/shop/eat/juce.svg";
+import chokolate from "../assets/shop/eat/chokolate.svg";
+import bananas from "../assets/shop/eat/bananas.svg";
 
 // Импорты одежды из магазина
-import tshirt from "../../public/shop/clothes/tshirt.png";
-import pants from "../../public/shop/clothes/pants.png";
-import sneakers from "../../public/shop/clothes/sneakers.png";
-import tshirt2 from "../../public/shop/clothes/tshirt2.svg";
-import sneakers2 from "../../public/shop/clothes/sneakers2.png";
+import tshirt from "../assets/shop/clothes/tshirt.svg";
+import pants from "../assets/shop/clothes/pants.svg";
+import sneakers from "../assets/shop/clothes/sneakers.svg";
+import tshirt2 from "../assets/shop/clothes/tshirtNefor.svg";
+import sneakers2 from "../assets/shop/clothes/sneakersNike.svg";
 
 // Импорты персонажа
-import unit1 from "../../public/unit/unit1.png";
+import unit1 from "../assets/unit/unit1.png";
 
 // Импорты кнопок в магазине
-import tabIconEat from "../../public/buttons/eatTab.svg";
-import tabIconClothes from "../../public/buttons/clothesTab.svg";
+import tabIconEat from "../assets/buttons/eatTab.svg";
+import tabIconClothes from "../assets/buttons/clothesTab.svg";
+
+// Импорты иконок состояния покупки в магазине
+import worn from "../assets/icons_shop/worn.svg";
+import purchased from "../assets/icons_shop/purchased.svg";
+
 // ==================================================================================
 
 // =================================== Импорты компонентов =============================
@@ -276,14 +278,48 @@ export const First = ({ id, fetchedUser }) => {
   const showSneakers2 = () => setActiveSneakers2((prevState) => !prevState);
   const showTshirt2 = () => setActiveTshirt2((prevState) => !prevState);
 
+  const [textState, setTextState] = useState();
+  const [imgState, setImgState] = useState(null);
+
   const [clothes, setClothes] = useState({
-    tshirt: { text: "Купить", isPurchased: false, isWorn: false },
-    pants: { text: "Купить", isPurchased: false, isWorn: false },
-    sneakers: { text: "Купить", isPurchased: false, isWorn: false },
-    sneakers2: { text: "Купить", isPurchased: false, isWorn: false },
-    tshirt2: { text: "Купить", isPurchased: false, isWorn: false },
+    tshirt: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    pants: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    sneakers: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    sneakers2: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
+    tshirt2: {
+      text: "Купить",
+      isPurchased: false,
+      isWorn: false,
+      textState: textState,
+      imgState: imgState,
+    },
   });
 
+  /*
   const handleClothesClick = (key) => {
     setClothes((prevClothes) => {
       const item = prevClothes[key];
@@ -304,7 +340,7 @@ export const First = ({ id, fetchedUser }) => {
       }
     });
   };
-
+*/
   const buyClothes = (name, price, value) => {
     setClothes((prevClothes) => {
       const item = prevClothes[name];
@@ -321,6 +357,8 @@ export const First = ({ id, fetchedUser }) => {
               isPurchased: true,
               isWorn: false, // Не надеваем при покупке
               text: "Надеть",
+              textState: "Купленно",
+              imgState: purchased,
             },
           };
         } else {
@@ -349,6 +387,8 @@ export const First = ({ id, fetchedUser }) => {
           ...item,
           isWorn: !item.isWorn, // Переключаем надет/снят
           text: item.isWorn ? "Надеть" : "Снять",
+          textState: item.isWorn ? "Купленно" : "Надето",
+          imgState: item.isWorn ? purchased : worn,
         },
       };
     });
@@ -387,30 +427,6 @@ export const First = ({ id, fetchedUser }) => {
                 <div className="shop_container">
                   {activeTab === "eat" && (
                     <>
-                      <Buster
-                        className="shop_items_style"
-                        onClick={() => activeBust(energy, 5, 10, 10)}
-                        img={energy}
-                        price={5}
-                        time={10}
-                        value={10}
-                      />
-                      <Buster
-                        className="shop_items_style"
-                        onClick={() => activeBust(chokolate2, 5, 10, 10)}
-                        img={chokolate2}
-                        price={5}
-                        time={10}
-                        value={10}
-                      />
-                      <Buster
-                        className="shop_items_style"
-                        onClick={() => activeBust(cocktiel, 5, 10, 10)}
-                        img={cocktiel}
-                        price={5}
-                        time={10}
-                        value={10}
-                      />
                       <Buster
                         className="shop_items_style"
                         onClick={() => activeBust(buter, 5, 10, 10)}
@@ -466,11 +482,11 @@ export const First = ({ id, fetchedUser }) => {
                       <Clothes
                         img={tshirt}
                         booster={clothes.tshirt}
-                        onButtonClick={() =>
+                        onButtonClick={() => {
                           clothes.tshirt.isPurchased
                             ? toggleWearClothes("tshirt", 25)
-                            : buyClothes("tshirt", 5, 25)
-                        }
+                            : buyClothes("tshirt", 5, 25);
+                        }}
                         value={25}
                         price={5}
                         balance={balans}

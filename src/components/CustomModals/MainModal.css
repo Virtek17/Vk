@@ -66,13 +66,13 @@ body {
   width: 70px;
   height: 64px;
 
-  border: 3px solid #CC6F00;
-  background-color: #E89A03;
-  border-radius: 20px; /* если нужен радиус */
+  background-color: #e89a03;
+  border-radius: 20px;
+  border: solid 2px #ffdc24;
 }
 
 .header_modal__btn.active {
-  background-color: #FBD221;
+  background-color: #ffd701;
 }
 
 @keyframes slideUp {

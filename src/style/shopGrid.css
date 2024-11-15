@@ -7,7 +7,7 @@
   overflow-y: scroll;
   font-size: 12px;
   padding-right: 12px;
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .shop_items_style {
@@ -17,9 +17,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
   padding: 10px;
   position: relative;
+  min-height: 120px;
 }
 
 .btnBuy {
@@ -38,15 +40,25 @@
   padding: 5px;
 
   cursor: pointer;
+
+  position: absolute;
+  right: 10px;
+}
+
+.btnBuy.purchased {
+  background-color: #ffaa05;
+  border-color: #cd6f01;
 }
 
 .characteristics {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-around;
+  gap: 15px;
   font-size: 18px;
   font-family: crooker;
   color: #9a7700;
+
   /* -webkit-text-stroke: 1px #000; */
 }
 
@@ -55,10 +67,29 @@
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
+  font-size: 16px;
+  max-height: 20px;
 }
 
 .leftIcon {
   transform: translateX(-6px);
+}
+
+.imgBg {
+  width: 91px;
+  height: 96px;
+  border-radius: 11px;
+  background-color: #e5ac43;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items_state {
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 ::-webkit-scrollbar {

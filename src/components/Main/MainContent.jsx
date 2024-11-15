@@ -1,11 +1,12 @@
 import React from "react";
 import { Image } from "@vkontakte/vkui";
 import "../../style/main.css";
-import tShirt from "../../../public/unit_clothes/tshirt.png";
-import pants from "../../../public/unit_clothes/pants.png";
-import sneakers from "../../../public/unit_clothes/sneakers.png";
-import sneakers2 from "../../../public/unit_clothes/sneakers2.png";
-import tShirt2 from "../../../public/unit_clothes/tshirt2.png";
+
+import tShirt from "../../assets/unit_clothes/tshirt.png";
+import pants from "../../assets/unit_clothes/pants.png";
+import sneakers from "../../assets/unit_clothes/sneakers.png";
+import sneakers2 from "../../assets/unit_clothes/sneakers2.png";
+import tShirt2 from "../../assets/unit_clothes/tshirt2.png";
 
 const MainContent = ({
   handleClick,

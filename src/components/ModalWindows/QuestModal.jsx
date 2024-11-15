@@ -68,6 +68,8 @@ export default function QuestModal({ balance, level }) {
           </Cell>
         ))}
       </Group>
+
+      <div></div>
     </div>
   );
 }

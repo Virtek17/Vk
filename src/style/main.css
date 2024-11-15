@@ -262,7 +262,7 @@ body,
 }
 
 .spinBg {
-  background-image: url("../../public/background/cardBg.svg");
+  background-image: url("../assets/background/cardBg.svg");
   background-repeat: no-repeat;
 
   width: 118px;

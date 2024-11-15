@@ -1,5 +1,5 @@
-import fightBtn from "../../../public/buttons/fightBtn.svg";
-import btnFightBg from "../../../public/background/btnFightBg.svg";
+import btnFightBg from "../../assets/background/btnFightBg.svg";
+import fightBtn from "../../assets/buttons/fightBtn.svg";
 
 export default function FightButton() {
   return (
